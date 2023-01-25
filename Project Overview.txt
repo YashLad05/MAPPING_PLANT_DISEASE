@@ -1,0 +1,3 @@
+Hello,
+We are trying to create a project for early detection of disease in the crops.
+This will help us categorise each plant and hence prevent spread of disease on whole farm.
