@@ -1,0 +1,5 @@
+API - http://api.mapmycrop.store/docs#/AI/detect_disease_ai_detect_disease_post 
+Purpose - Detecting diseases using image
+API Key - 88ce5746a5904ba6947ed9a8bf22d6a9
+Request URL - https://api.mapmycrop.store/ai/detect-disease?api_key=88ce5746a5904ba6947ed9a8bf22d6a9
+Request Type - POST
