@@ -1,3 +1,12 @@
 Hello,
 We are trying to create a project for early detection of disease in the crops.
 This will help us categorise each plant and hence prevent spread of disease on whole farm.
+
+create using vite JS > better than create-react-app
+
+Use this website components:
+https://edurigo.com/
+https://www.icframework.com/
+
+Make commercials like this:
+YT Search: ibm let's create commercial
