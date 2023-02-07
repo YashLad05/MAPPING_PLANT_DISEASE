@@ -7,7 +7,6 @@ const App = () => (
     <div>
       <Navbar />
       <Header />
-      <Results />
     </div>
 )
 

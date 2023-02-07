@@ -27,6 +27,16 @@
     padding-bottom: 1rem;
 }
 
+.app__cropImage-dialog {
+    font-family: var(--font-alt);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+
 @media screen and (max-width: 850px) {
     .app__Result-content-h2 {
         font-family: var(--font-base);
