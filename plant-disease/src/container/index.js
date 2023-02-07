@@ -1,4 +1,4 @@
 import Header from './Header/Header';
-import Results from './Results/Results'
+import Results from './Header/Results'
 
 export { Header, Results };
