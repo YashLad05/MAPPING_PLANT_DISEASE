@@ -51,6 +51,21 @@ function Header() {
                 setData(res.data);
             })
 
+        // fetch(API_URL, {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     body: formData,
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data'
+        //     }
+        // }).then(function (response) {
+        //     console.log(response.status);
+        //     console.log('response');
+        //     console.log(response);
+        // }).catch(function(error) {
+        //     console.log(error);
+        // })
+
     }
 
     return (
@@ -63,7 +78,7 @@ function Header() {
 
                 <div className='app__cropImage'>
                     <div className="app__cropImage-content">
-                        <form onSubmit={handleSubmit(onSubmit)}>
+                        <form id='imageForm' onSubmit={handleSubmit(onSubmit)}>
                             <div className='app__cropImage-content_input'>
                                 <input
                                     {...register('file', { required: true })}
@@ -73,6 +88,7 @@ function Header() {
                                     accept="image/jpeg, image/png, image/jpg"
                                     id="upload_img"
                                     name='file'
+                                    required
                                 ></input>
 
                                 {errors.file?.type === 'required' && (
