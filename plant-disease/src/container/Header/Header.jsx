@@ -5,14 +5,13 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { AiFillRightCircle, AiFillLike } from 'react-icons/ai';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import './Header.css';
 const API_URL = 'https://api.mapmycrop.store/ai/detect-disease?api_key=88ce5746a5904ba6947ed9a8bf22d6a9';
 
 function Header() {
 
     const {
-        register,
-        handleSubmit,
         formState: { errors },
     } = useForm();
 
@@ -21,6 +20,7 @@ function Header() {
     const [addBtnDisable, setAddBtnDisable] = useState(true);
     const [preview, setPreview] = useState(null);
     const [data, setData] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
     const onAddImage = (file) => {
         window.URL.revokeObjectURL(preview);
@@ -44,39 +44,43 @@ function Header() {
         const formData = new FormData();
         formData.append('image', file);
         console.log('Uploaded file -', file);
+        setLoading(true);
 
-        const result = await axios
-            .post(API_URL, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
+        try {
+            const result = await axios
+                .post(API_URL, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    }
                 }
-            }).then((res) => {
-                console.log(res.data);
-                setData(res.data);
-                setAddBtnDisable(true);
-                setConformBtnDisabled(true);
-            })
-
-        // fetch(API_URL, {
-        //     method: 'POST',
-        //     mode: 'cors',
-        //     body: formData,
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     }
-        // }).then(function (response) {
-        //     console.log(response.status);
-        //     console.log('response');
-        //     console.log(response);
-        // }).catch(function(error) {
-        //     console.log(error);
-        // })
-
+                ).then((res) => {
+                    console.log(res.data);
+                    setData(res.data);
+                    setAddBtnDisable(true);
+                    setConformBtnDisabled(true);
+                    setLoading(false);
+                })
+        } catch (e) {
+            console.log(e);
+        }
     }
 
-    (()=> {
-        console.log('Output Data is', data)
-    })();
+    // fetch(API_URL, {
+    //     method: 'POST',
+    //     mode: 'cors',
+    //     body: formData,
+    //     headers: {
+    //         'Content-Type': 'multipart/form-data'
+    //     }
+    // }).then(function (response) {
+    //     console.log(response.status);
+    //     console.log('response');
+    //     console.log(response);
+    // }).catch(function(error) {
+    //     console.log(error);
+    // })
+
+    console.log('Output Data is', data)
 
     return (
         <>
@@ -128,22 +132,33 @@ function Header() {
                                                 color="primary"
                                                 disabled={addBtnDisable}
                                                 onClick={onSubmit}>
-                                                    Start Health Check
+                                                Start Health Check
                                             </Button>
-                                            
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
                             </form>
 
-                            {data ?
-                                <p className='p__opensans app__cropImage-scroll'>
-                                    <AiFillRightCircle className='app__cropImage-icons' />
-                                    Please Scroll down to see Health check results
-                                    <AiFillLike className='app__cropImage-icons' />
-                                </p> : null
-                            }
+                            <div style={{
+                                'display': 'flex',
+                                'justifyContent': 'center',
+                                'alignItems': 'center'
+                            }}>
+                                {isLoading === true ?
+                                    <div>
+                                        <CircularProgress
+                                            style={{ color: '#FFF', 'margin': '1rem 0' }} /></div>
+                                    : null
+                                }
+                                {data ?
+                                    <p className='p__opensans app__cropImage-scroll'>
+                                        <AiFillRightCircle className='app__cropImage-icons' />
+                                        Please Scroll down to see Health check results
+                                        <AiFillLike className='app__cropImage-icons' />
+                                    </p> : null
+                                }
+                            </div>
 
                         </div>
                     </div>
